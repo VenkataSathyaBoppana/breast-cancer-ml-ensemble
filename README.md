@@ -83,7 +83,7 @@ Jupyter Notebook – Analysis workflow
 
 ### Clone this repository:
 
-git clone https://github.com/bhavika28/breast-mass-classification.git
+git clone [https://github.com/bhavika28/breast-mass-classification.git](https://github.com/VenkataSathyaBoppana/breast-cancer-ml-ensemble)
 cd breast-mass-classification
 
 
