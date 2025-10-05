@@ -1,174 +1,169 @@
-# 🩺 Breast Mass Classification with Decision Trees, Random Forests, AdaBoost, Naive Bayes & PCA
+
+# 🩺 Breast Cancer Classification using Decision Trees, Random Forests, AdaBoost, Naive Bayes & PCA
 
 ## 📌 Overview
-This project implements multiple machine learning techniques to classify breast masses as benign (0) or malignant (1) using a dataset of 569 instances and 30 features extracted from digitized fine needle aspirate (FNA) images.
-By comparing Decision Trees, Random Forests, AdaBoost, and Naive Bayes, along with dimensionality reduction via PCA, the project highlights trade-offs in interpretability, accuracy, and model robustness.
 
-## 🎯 Motivation
-Early and accurate breast cancer detection is critical for improving patient outcomes. This project demonstrates how diverse machine learning models can be applied, evaluated, and visualized to provide insights into predictive performance and feature importance in medical data.
+This project presents a comparative machine learning study to classify breast tumors as **benign (0)** or **malignant (1)**. Using a dataset of 569 samples and 30 diagnostic features derived from fine needle aspirate (FNA) images, it explores how various algorithms — Decision Trees, Random Forests, AdaBoost, and Naive Bayes — perform under different configurations, both with and without dimensionality reduction using PCA.
+
+The goal is to demonstrate trade-offs between model interpretability, computational efficiency, and predictive performance in a healthcare classification setting.
+
+---
+
+## 🎯 Objective
+
+Early detection of breast cancer significantly improves survival rates. This project highlights how machine learning techniques can support medical decision-making by identifying patterns in diagnostic data and delivering interpretable, accurate predictions for clinical use.
+
+---
 
 ## 📂 Dataset
 
-data/Breast_Mass.csv – Breast cancer dataset with 569 rows × 30 features
+**File:** `data/Breast_Mass.csv`
+**Instances:** 569
+**Features:** 30 (mean, standard error, and worst values for radius, texture, perimeter, area, smoothness, etc.)
+**Target Variable:**
 
-Features: characteristics of cell nuclei (mean, standard error, worst values of radius, texture, perimeter, area, etc.)
+* `0` → Benign
+* `1` → Malignant
 
-Target:
+The dataset originates from digitized FNA images, each containing real-valued features computed from the cell nuclei.
 
-0 = Benign
+---
 
-1 = Malignant
+## ⚙️ Workflow
 
-## ⚙️ Methodology
+### 1. Data Preparation
 
-Data Import & Preprocessing
+* Handled missing values and normalized all numerical features
+* Split dataset into training (70%) and testing (30%) sets
 
-Handle missing values
+### 2. Model Development
 
-Normalize features
+**Decision Trees**
 
-Train-test split: 70% training, 30% testing
+* Criteria: Gini Impurity & Entropy
+* Depth tuning (1–20), pruning experiments
+* Visualization using Graphviz
 
-Decision Trees
+**Random Forests**
 
-Criteria: Entropy & Gini
+* Estimators tested: 10, 50, 100, 500, 1000
+* 5-fold cross-validation
+* Feature importance via Mean Decrease in Impurity (MDI) and Permutation Importance
 
-Visualizations with Graphviz
+**AdaBoost**
 
-Tree pruning & depth variation (1–20)
+* Estimators tested: 10, 50, 100, 500, 1000
+* 5-fold cross-validation for evaluation
 
-Random Forests
+**Naive Bayes**
 
-Estimator experiments: 10, 50, 100, 500, 1000
+* Gaussian Naive Bayes used as a baseline classifier
 
-Cross-validation (5-fold)
+**Principal Component Analysis (PCA)**
 
-Feature importance: MDI vs Permutation
+* Reduced dimensionality while retaining >95% explained variance
+* Compared Random Forest performance on reduced vs full feature sets
 
-AdaBoost
+---
 
-Estimator experiments: 10, 50, 100, 500, 1000
+## 🛠️ Tools & Libraries
 
-Cross-validation (5-fold)
+* **Python 3.10+**
+* **Pandas, NumPy** – data handling and numerical processing
+* **Scikit-learn** – model training, evaluation, and PCA
+* **Matplotlib** – visual analysis and performance plots
+* **Graphviz** – tree structure visualization
+* **Jupyter Notebook** – interactive analysis
 
-Naive Bayes
+---
 
-Gaussian Naive Bayes for baseline comparison
+## 🚀 How to Run
 
-PCA
+### Clone the repository
 
-Dimensionality reduction
-
-Retain >95% explained variance
-
-Compare Random Forest on reduced vs full feature sets
-
-## 🛠️ Technologies Used
-
-Python 3.10+
-
-Pandas – Data manipulation
-
-NumPy – Numerical operations
-
-Scikit-learn – ML models & PCA
-
-Matplotlib – Visualizations
-
-Graphviz – Decision tree visualization
-
-Jupyter Notebook – Analysis workflow
-
-## 🚀 Quick Start
-
-### Clone this repository:
-
+```bash
 git clone https://github.com/VenkataSathyaBoppana/breast-cancer-ml-ensemble
-cd breast-mass-classification
+cd breast-cancer-ml-ensemble
+```
 
+### Install dependencies
 
-### Install dependencies:
-
+```bash
 pip install -r requirements.txt
+```
 
+### Launch the notebook
 
-### Run the analysis notebook:
-
+```bash
 jupyter notebook notebooks/BreastMass_Classification.ipynb
+```
 
+### Or run scripts directly
 
-### Or run scripts directly:
-
+```bash
 python scripts/DecisionTree.py
 python scripts/RandomForest.py
 python scripts/AdaBoost.py
 python scripts/NaiveBayes.py
 python scripts/PCA_RF.py
+```
 
+---
 
-## 📁 Project Files
+## 📁 Repository Structure
 
-data/Breast_Mass.csv – Input dataset
+```
+data/
+ └── Breast_Mass.csv
+notebooks/
+ └── BreastMass_Classification.ipynb
+scripts/
+ ├── DecisionTree.py
+ ├── RandomForest.py
+ ├── AdaBoost.py
+ ├── NaiveBayes.py
+ └── PCA_RF.py
+README.md
+requirements.txt
+```
 
-notebooks/BreastMass_Classification.ipynb – Full analysis & visualizations
+---
 
-scripts/DecisionTree.py – Decision Tree training, pruning, depth experiments
+## 🔬 Key Insights
 
-scripts/RandomForest.py – Random Forest with estimators, feature importance, CV
+* Decision Trees provided the best interpretability
+* Random Forests achieved the highest accuracy and robustness
+* AdaBoost improved stability with ensemble learning
+* Naive Bayes served as a lightweight, quick baseline
+* PCA reduced dimensionality with minimal performance loss
 
-scripts/AdaBoost.py – AdaBoost experiments & CV
+---
 
-scripts/NaiveBayes.py – Gaussian Naive Bayes baseline
+## 📊 Visualizations
 
-scripts/PCA_RF.py – PCA + Random Forest comparison
+* Decision Tree diagrams (Entropy vs Gini)
+* Accuracy vs tree depth and number of estimators
+* Feature importance comparisons (MDI vs Permutation)
+* PCA explained variance plot and reduced-space visualization
 
-README.md – Project documentation
+---
 
-## 🔬 Technical Highlights
+## 🎯 Outcomes
 
-Comparative study across 4 classification models
+This study underscores how machine learning can support **early breast cancer screening** by balancing transparency and predictive strength.
 
-Hyperparameter experiments: depth (Decision Trees), estimators (RF, AdaBoost)
+* **Interpretability**: Decision Trees
+* **Robustness**: Random Forests, AdaBoost
+* **Simplicity**: Naive Bayes
+* **Efficiency**: PCA
 
-Cross-validation for robust performance metrics
+---
 
-Feature importance explained with two methods
+## 🧠 Citation
 
-PCA-based dimensionality reduction for efficiency
+If referencing this work, please cite:
 
-Visualizations:
+> Boppana, V. S. (2025). *Breast Cancer Classification using Decision Trees, Random Forests, AdaBoost, Naive Bayes & PCA.*
 
-Decision Trees (Entropy vs Gini)
+---
 
-Accuracy vs depth/estimators plots
-
-Feature importance charts
-
-PCA explained variance
-
-📊 Visualizations
-
-🌳 Decision Tree structures (Entropy & Gini)
-
-📈 Accuracy trends across varying tree depths
-
-🌲 Random Forest accuracy vs number of estimators
-
-⭐ Feature importance (MDI vs Permutation)
-
-🌀 PCA variance explained and reduced-feature performance
-
-## 🎯 Impact
-This project demonstrates how machine learning can aid in early breast cancer detection by providing:
-
-Interpretability (Decision Trees)
-
-Robustness (Random Forests, AdaBoost)
-
-Simplicity (Naive Bayes baseline)
-
-Dimensionality reduction benefits (PCA)
-
-## 📝 Citation
-If you use this work, please cite:
-Prasannakumar, B. (2024). Breast Mass Classification with Decision Trees, Random Forests, AdaBoost, Naive Bayes & PCA. 
